@@ -1,0 +1,20 @@
+# Streamlit应用依赖配置
+# 自动生成基于 app2.py 的依赖列表
+
+# 核心Web框架
+streamlit==1.28.0
+
+# 数据处理与科学计算
+numpy==1.24.3
+pandas==2.1.4
+scipy==1.11.4
+
+# 数据可视化
+matplotlib==3.7.1
+
+# Excel文件支持（pandas读取xlsx需要）
+openpyxl==3.1.2
+
+# 可选：用于处理中文字体（如果图表显示中文）
+# matplotlib默认不包含中文字体，可添加以下依赖
+# pillow==10.0.0
