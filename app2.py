@@ -6,7 +6,7 @@ import streamlit as st
 import io
 from datetime import datetime
 
-plt.rcParams['font.family'] = 'SimHei'
+plt.rcParams['font.sans-serif'] = ['DejaVu Sans'] 
 plt.rcParams['axes.unicode_minus'] = False
 
 class Interferometer3x3Demodulator:
