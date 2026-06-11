@@ -6,7 +6,7 @@ import streamlit as st
 import io
 from datetime import datetime
 
-plt.rcParams["font.sans-serif"] = "Noto Sans CJK JP"
+plt.rcParams['font.family'] = 'SimHei'
 plt.rcParams['axes.unicode_minus'] = False
 
 class Interferometer3x3Demodulator:
@@ -246,15 +246,15 @@ def main():
             
             display_points = len(t)
             ax1.plot(t[:display_points], sig1[:display_points], 'b-', alpha=0.7, linewidth=1)
-            ax1.set_xlabel('时间 (s)')
-            ax1.set_ylabel('幅度')
-            ax1.set_title('通道1信号 (P1)')
+            ax1.set_xlabel('time (s)')
+            ax1.set_ylabel('amplitude')
+            ax1.set_title('PD1 signal (P1)')
             ax1.grid(True, alpha=0.3)
             
             ax2.plot(t[:display_points], sig2[:display_points], 'r-', alpha=0.7, linewidth=1)
-            ax2.set_xlabel('时间 (s)')
-            ax2.set_ylabel('幅度')
-            ax2.set_title('通道2信号 (P2)')
+            ax2.set_xlabel('time (s)')
+            ax2.set_ylabel('amplitude')
+            ax2.set_title('PD2 signal (P2)')
             ax2.grid(True, alpha=0.3)
             
             plt.tight_layout()
@@ -274,21 +274,21 @@ def main():
             fig2, (ax3, ax4, ax5) = plt.subplots(3, 1, figsize=(12, 10))
             
             ax3.plot(t, phase_demod, 'g-', alpha=0.7, linewidth=0.5)
-            ax3.set_xlabel('时间 (s)')
-            ax3.set_ylabel('相位 (rad)')
-            ax3.set_title(f'{method} - 解调相位（原始）')
+            ax3.set_xlabel('time (s)')
+            ax3.set_ylabel('amplitude (rad)')
+            ax3.set_title(f'{method} - Demodulated Phase(raw)')
             ax3.grid(True, alpha=0.3)
             
             ax4.plot(t, phase_unwrapped, 'b-', alpha=0.7, linewidth=0.5)
-            ax4.set_xlabel('时间 (s)')
-            ax4.set_ylabel('相位 (rad)')
-            ax4.set_title(f'{method} - 解调相位（解卷绕后）')
+            ax4.set_xlabel('time (s)')
+            ax4.set_ylabel('phase (rad)')
+            ax4.set_title(f'{method} - Demodulated Phase(unwrapped)')
             ax4.grid(True, alpha=0.3)
             
             ax5.plot(t, phase_filtered, 'r-', alpha=0.7, linewidth=0.5)
-            ax5.set_xlabel('时间 (s)')
-            ax5.set_ylabel('相位 (rad)')
-            ax5.set_title(f'{method} - 解调相位（低通滤波后）')
+            ax5.set_xlabel('time (s)')
+            ax5.set_ylabel('phase (rad)')
+            ax5.set_title(f'{method} - Demodulated Phase(​Low-Pass Filtered)')
             ax5.grid(True, alpha=0.3)
             
             plt.tight_layout()
@@ -302,13 +302,13 @@ def main():
             
             fig3, ax6 = plt.subplots(1, 1, figsize=(12, 4))
             if len(freqs_phase) > 0:
-                max_freq = min(5000, fs/2)
+                max_freq = min(10000, fs/2)
                 idx_max = np.where(freqs_phase <= max_freq)[0][-1] if np.any(freqs_phase <= max_freq) else len(freqs_phase)-1
                 
                 ax6.plot(freqs_phase[:idx_max], fft_phase[:idx_max], 'g-', alpha=0.7)
-                ax6.set_xlabel('频率 (Hz)')
-                ax6.set_ylabel('幅度')
-                ax6.set_title('解调相位傅里叶变换')
+                ax6.set_xlabel('frequence (Hz)')
+                ax6.set_ylabel('amplitude')
+                ax6.set_title('Fourier Transform of Demodulated Phase')
                 ax6.grid(True, alpha=0.3)
             
             plt.tight_layout()
@@ -351,18 +351,18 @@ def main():
                 
                 ax7.plot(t, phase_doc_filt, 'b-', alpha=0.7, linewidth=0.5, label='文档算法')
                 ax7.plot(t, phase_dcm_filt, 'r--', alpha=0.7, linewidth=0.5, label='DCM算法')
-                ax7.set_xlabel('时间 (s)')
-                ax7.set_ylabel('相位 (rad)')
-                ax7.set_title('算法对比 - 滤波后相位')
+                ax7.set_xlabel('time (s)')
+                ax7.set_ylabel('amplitude (rad)')
+                ax7.set_title('filtered difference')
                 ax7.legend()
                 ax7.grid(True, alpha=0.3)
                 
                 # 计算差值
                 phase_diff = phase_doc_filt - phase_dcm_filt
                 ax8.plot(t, phase_diff, 'k-', alpha=0.7, linewidth=0.5)
-                ax8.set_xlabel('时间 (s)')
-                ax8.set_ylabel('相位差 (rad)')
-                ax8.set_title('算法差值 (文档算法 - DCM算法)')
+                ax8.set_xlabel('time (s)')
+                ax8.set_ylabel('phase difference (rad)')
+                ax8.set_title('difference(maxmin vs dcm)')
                 ax8.grid(True, alpha=0.3)
                 
                 plt.tight_layout()
