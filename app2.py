@@ -288,7 +288,7 @@ def main():
             ax5.plot(t, phase_filtered, 'r-', alpha=0.7, linewidth=0.5)
             ax5.set_xlabel('time (s)')
             ax5.set_ylabel('phase (rad)')
-            ax5.set_title(f'{method} - Demodulated Phase(​Low-Pass Filtered)')
+            ax5.set_title(f'{method} - Demodulated Phase (Low-Pass Filtered)')
             ax5.grid(True, alpha=0.3)
             
             plt.tight_layout()
